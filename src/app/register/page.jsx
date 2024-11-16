@@ -60,6 +60,8 @@ const Register = async () => {
             />
           </div>
           <Button className="mt-4 w-full">Sign up &rarr;</Button>
+          <p>Already have an account?{" "}<Link href="/login">Login</Link></p>
+
         </div>
       </form>
     </div>
