@@ -1,6 +1,12 @@
 //src/app/private/dashboard/page.jsx
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  TableHeader,
+} from "@/components/ui/card";
 
 const Dashboard = () => {
   return (
@@ -36,9 +42,7 @@ const Dashboard = () => {
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Sales
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Sales</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text 2xl font-bold">+12,234</div>
@@ -55,9 +59,18 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text 2xl font-bold">+578</div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">+234% since last hour</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  +234% since last hour
+                </p>
               </CardContent>
             </Card>
+          </div>
+          <div className="grip gap-6">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">
+                Resent Signups
+              </CardTitle>
+            </CardHeader>
           </div>
         </div>
       </div>
