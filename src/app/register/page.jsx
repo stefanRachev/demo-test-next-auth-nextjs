@@ -1,3 +1,5 @@
+//src/app/register/page.js
+
 import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
@@ -7,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 import React from "react";
+import register from "@/action/user";
 
 const Register = async () => {
   return (
@@ -17,7 +20,7 @@ const Register = async () => {
       <p className="text-sm md:text-base text-neutral-600 mt-2 dark:text-neutral-300">
         Please provide all the necessary information
       </p>
-      <form className="my-8">
+      <form className="my-8" action={register}>
         <div className="flex flex-col space-y-4">
           <div>
             <Label htmlFor="firstname">First Name</Label>
@@ -60,8 +63,9 @@ const Register = async () => {
             />
           </div>
           <Button className="mt-4 w-full">Sign up &rarr;</Button>
-          <p>Already have an account?{" "}<Link href="/login">Login</Link></p>
-
+          <p>
+            Already have an account? <Link href="/login">Login</Link>
+          </p>
         </div>
       </form>
     </div>
