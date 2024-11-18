@@ -4,10 +4,11 @@ const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
-  firstName: { type: String, select: true },
+  password: { type: String, required: true },
   role: { type: String, default: "user" },
   image: { type: String },
   authProvideId: { type: String },
 });
 
-export const User = mongoose.models?.User || mongoose.model("User",userSchema)
+const User = mongoose.models?.User || mongoose.model("User", userSchema);
+export default User;
