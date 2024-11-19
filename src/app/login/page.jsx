@@ -1,4 +1,5 @@
 import { login } from "@/action/user";
+import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,7 +37,10 @@ const Login = () => {
       </form>
 
       <section className="flex space-x-4">
-        <form action="">
+        <form action={async ()=> {
+          "use server"
+          await signIn("github")
+        }}>
           <Button className="flex items-center space-x-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
             <IconBrandGithub className="h-6 w-6" />
             <span className="text-sm">Github</span>

@@ -1,6 +1,7 @@
 //src/auth.js
 
 import NextAuth, { CredentialsSignin } from "next-auth";
+import Github from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "./lib/db";
 import User from "@/models/User";
@@ -8,6 +9,10 @@ import { compare } from "bcryptjs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
+    Github({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret:process.env.GIT_HUB_CLIENT_SECRET
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -54,9 +59,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
 
-pages:{
-  signIn:"/login"
-},
+  pages: {
+    signIn: "/login",
+  },
 
   //secret: process.env.AUTH_SECRET || "some_default_secret",
 });
