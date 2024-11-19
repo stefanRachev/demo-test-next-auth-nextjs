@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 import React from "react";
-import register from "@/action/user";
+import {register} from "@/action/user";
 
 const Register = async () => {
   return (
