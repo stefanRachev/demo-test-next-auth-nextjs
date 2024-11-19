@@ -7,7 +7,6 @@ import { IconBrandGithub } from "@tabler/icons-react";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import Link from "next/link";
 
-
 const Login = () => {
   return (
     <div className="mt-10 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white border border-[#121212] dark:bg-neutral-900">
@@ -37,17 +36,24 @@ const Login = () => {
       </form>
 
       <section className="flex space-x-4">
-        <form action={async ()=> {
-          "use server"
-          await signIn("github")
-        }}>
+        <form
+          action={async () => {
+            "use server";
+            await signIn("github");
+          }}
+        >
           <Button className="flex items-center space-x-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
             <IconBrandGithub className="h-6 w-6" />
             <span className="text-sm">Github</span>
           </Button>
         </form>
 
-        <form action="">
+        <form
+          action={async () => {
+            "use server";
+            await signIn("google");
+          }}
+        >
           <Button className="flex items-center space-x-2 bg-gray-200 text-black hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
             <IconBrandGoogle className="h-6 w-6" />
             <span className="text-sm">Google</span>

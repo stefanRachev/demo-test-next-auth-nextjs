@@ -2,6 +2,7 @@
 
 import NextAuth, { CredentialsSignin } from "next-auth";
 import Github from "next-auth/providers/github";
+import Google from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "./lib/db";
 import User from "@/models/User";
@@ -11,7 +12,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Github({
       clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret:process.env.GIT_HUB_CLIENT_SECRET
+      clientSecret:process.env.GITHUB_CLIENT_SECRET
+    }),
+
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret:process.env.GOOGLE_CLIENT_SECRET
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -63,5 +69,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
 
-  //secret: process.env.AUTH_SECRET || "some_default_secret",
+  secret: process.env.AUTH_SECRET || "some_default_secret",
 });
