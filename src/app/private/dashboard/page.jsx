@@ -1,4 +1,6 @@
 //src/app/private/dashboard/page.jsx
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 import {
   Card,
@@ -8,7 +10,12 @@ import {
   TableHeader,
 } from "@/components/ui/card";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  
+  const session = await auth();
+  const user = session?.user;
+  if (!user) redirect("/");
+
   return (
     <div className="flex min-h-screen">
       <div className="flex-1 bg-gray-100 dark:bg-gray-950">

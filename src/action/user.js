@@ -55,3 +55,10 @@ export const register = async (formData) => {
 };
 
 
+export const fetchAllUsers = async ()=>{
+  await  connectDB();
+  const users = await User.find({});
+  return users
+}
+
+

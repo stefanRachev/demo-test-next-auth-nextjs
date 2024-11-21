@@ -2,7 +2,7 @@
 
 import NextAuth, { CredentialsSignin } from "next-auth";
 import Github from "next-auth/providers/github";
-import Google from "next-auth/providers/google"
+import Google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "./lib/db";
 import User from "@/models/User";
@@ -12,12 +12,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Github({
       clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret:process.env.GITHUB_CLIENT_SECRET
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
 
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret:process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -67,6 +67,47 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   pages: {
     signIn: "/login",
+  },
+
+  callbacks: {
+    async session({ session, token }) {
+      if (token?.sub && token?.role) {
+        session.user.id = token.sub;
+        session.user.role = token.role;
+      }
+      return session;
+    },
+
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
+
+    signIn: async ({ user, account }) => {
+      if (account?.provider === "google") {
+        try {
+          const { name, email, image, id } = user;
+          await connectDB();
+          const alreadyUser = await User.findOne({ email });
+
+          if (!alreadyUser) {
+            await User.create({ email, name, image, authProvideId: id });
+          } else {
+            return true;
+          }
+        } catch (error) {
+          throw new Error("Error while creating user");
+        }
+      }
+
+      if (account?.provider === "credentials") {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 
   secret: process.env.AUTH_SECRET || "some_default_secret",
